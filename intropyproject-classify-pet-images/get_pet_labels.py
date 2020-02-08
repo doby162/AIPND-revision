@@ -42,4 +42,17 @@ def get_pet_labels(image_dir):
     """
     # Replace None with the results_dic dictionary that you created with this
     # function
-    return None
+    #
+    # Creates empty dictionary named results_dic
+
+    from os import listdir
+
+    filename_list = listdir(image_dir)
+    results_dic = dict()
+
+    for idx in range(0, len(filename_list), 1):
+        name = filename_list[idx].lower().split("_")
+        name = " ".join(name[0:-1])
+        results_dic[filename_list[idx]] = [name]
+
+    return results_dic
