@@ -38,6 +38,32 @@ def print_results(
     print_incorrect_dogs=False,
     print_incorrect_breed=False,
 ):
+    print("Using model:" + model)
+    print("Number of images: " + str(results_stats_dic["n_images"]))
+    print("Number of dog images: " + str(results_stats_dic["n_dogs_img"]))
+    print("Number of not-dog images: " + str(results_stats_dic["n_notdogs_img"]))
+
+    for key in results_stats_dic:
+        if 0 == key.find("pct"):
+            print(
+                key.replace("pct_", "").replace("_", " ")
+                + " : "
+                + str(results_stats_dic[key])
+            )
+    if print_incorrect_dogs:
+        for key in results_dic:
+            ls = results_dic[key]
+            if ls[3] != ls[4]:
+                print("Misclassified dog:")
+                print(ls)
+
+    if print_incorrect_breed:
+        for key in results_dic:
+            ls = results_dic[key]
+            if ls[3] + ls[4] == 2 and ls[2] == False:
+                print("Misclassified breed:")
+                print(ls)
+
     """
     Prints summary results on the classification and then prints incorrectly 
     classified dogs and incorrectly classified dog breeds if user indicates 
