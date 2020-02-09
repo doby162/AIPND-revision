@@ -70,4 +70,39 @@ def calculates_results_stats(results_dic):
     """
     # Replace None with the results_stats_dic dictionary that you created with
     # this function
-    return None
+    results_stats_dic = {}
+    results_stats_dic["n_images"] = len(results_dic)
+    results_stats_dic["n_dogs_img"] = len(
+        list(filter(lambda x: x[3], results_dic.values()))
+    )
+    results_stats_dic["n_notdogs_img"] = (
+        results_stats_dic["n_images"] - results_stats_dic["n_dogs_img"]
+    )
+    results_stats_dic["n_match"] = len(
+        list(filter(lambda x: x[3] == x[4], results_dic.values()))
+    )
+    results_stats_dic["n_correct_dogs"] = len(
+        list(filter(lambda x: x[3] and x[4], results_dic.values()))
+    )
+    results_stats_dic["n_correct_notdogs"] = len(
+        list(filter(lambda x: not x[3] and not x[4], results_dic.values()))
+    )
+    results_stats_dic["n_correct_breed"] = len(
+        list(filter(lambda x: x[2] and x[3], results_dic.values()))
+    )
+    # pct_match - percentage of correct matches
+    results_stats_dic["pct_match"] = (
+        results_stats_dic["n_match"] / results_stats_dic["n_images"]
+    ) * 100  # pct_correct_dogs - percentage of correctly classified dogs
+    results_stats_dic["pct_correct_dogs"] = (
+        results_stats_dic["n_correct_dogs"] / results_stats_dic["n_dogs_img"]
+    ) * 100
+    # pct_correct_breed - percentage of correctly classified dog breeds
+    results_stats_dic["pct_correct_breed"] = (
+        results_stats_dic["n_correct_breed"] / results_stats_dic["n_dogs_img"]
+    ) * 100  # pct_correct_notdogs - percentage of correctly classified NON-dogs
+    results_stats_dic["pct_correct_notdogs"] = (
+        results_stats_dic["n_correct_notdogs"] / results_stats_dic["n_notdogs_img"]
+    ) * 100
+
+    return results_stats_dic

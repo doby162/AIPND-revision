@@ -73,6 +73,8 @@ def adjust_results4_isadog(results_dic, dogfile):
     file_data = f.read()
     f.close()
 
+    file_data = "\n".join(file_data.split(", "))
+
     for key in results_dic:
         ls = results_dic[key]
 
