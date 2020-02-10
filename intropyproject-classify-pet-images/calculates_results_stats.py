@@ -79,7 +79,7 @@ def calculates_results_stats(results_dic):
         results_stats_dic["n_images"] - results_stats_dic["n_dogs_img"]
     )
     results_stats_dic["n_match"] = len(
-        list(filter(lambda x: x[3] == x[4], results_dic.values()))
+        list(filter(lambda x: x[2], results_dic.values()))
     )
     results_stats_dic["n_correct_dogs"] = len(
         list(filter(lambda x: x[3] and x[4], results_dic.values()))
@@ -91,6 +91,9 @@ def calculates_results_stats(results_dic):
         list(filter(lambda x: x[2] and x[3], results_dic.values()))
     )
     # pct_match - percentage of correct matches
+    print("wowowowow")
+    print(results_stats_dic["n_images"])
+    print(results_stats_dic["n_match"])
     results_stats_dic["pct_match"] = (
         results_stats_dic["n_match"] / results_stats_dic["n_images"]
     ) * 100  # pct_correct_dogs - percentage of correctly classified dogs
