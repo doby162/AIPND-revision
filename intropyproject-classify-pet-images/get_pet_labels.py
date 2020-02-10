@@ -51,8 +51,9 @@ def get_pet_labels(image_dir):
     results_dic = dict()
 
     for idx in range(0, len(filename_list), 1):
-        name = filename_list[idx].lower().split("_")
-        name = " ".join(name[0:-1])
-        results_dic[filename_list[idx]] = [name]
+        if not filename_list[idx].startswith("."):  # filter out hidden files
+            name = filename_list[idx].lower().split("_")
+            name = " ".join(name[0:-1])
+            results_dic[filename_list[idx]] = [name]
 
     return results_dic
